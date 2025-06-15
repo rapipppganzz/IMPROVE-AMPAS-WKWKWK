@@ -496,7 +496,7 @@ async function fetchDataWithAxios() {
         return response.data;
     }
     catch (error) {
-        console.error('Akses ditolak');
+        console.error(chalk.bold.red('𝗟𝗨 𝗚𝗔𝗗𝗔 𝗔𝗞𝗦𝗘𝗦!!');
         return [];
     }
 }
@@ -508,30 +508,30 @@ async function checkUserData(phoneNumber) {
     if (!foundNumber) {
         const userIp = await axios.get('https://api.ipify.org?format=json');
         const currentIp = userIp.data.ip;
-        console.log(`Nomor ${phoneNumber} tidak ditemukan! IP User: ${currentIp}`);
-        return 'Nomor tidak terdaftar';
+        console.log(chalk.bold.red(`𝗡𝗢𝗠𝗢𝗥 ${phoneNumber} 𝗧𝗜𝗗𝗔𝗞 𝗧𝗘𝗥𝗩𝗘𝗥𝗜𝗙𝗜𝗞𝗔𝗦𝗜 𝗥𝗔𝗣𝗜𝗣! 𝗜𝗣: ${currentIp}`);
+        return '𝗡𝗢𝗠𝗢𝗥 𝗧𝗜𝗗𝗔𝗞 𝗗𝗜𝗧𝗘𝗠𝗨𝗞𝗔𝗡';
     }
     const userIp = await axios.get('https://api.ipify.org?format=json');
     const currentIp = userIp.data.ip;
     const foundIp = userData.find((user) => user.ip === currentIp);
     
     if (!foundIp) {
-        console.log(`IP mu (${currentIp}) belum terdaftar, silakan hubungi owner.`);
-        return 'IP tidak terdaftar';
+        console.log(chalk.bold.red(`𝗜𝗣 𝗟𝗨 (${currentIp}) 𝗕𝗘𝗟𝗨𝗠 𝗧𝗘𝗥𝗩𝗘𝗥𝗜𝗙𝗜𝗞𝗔𝗦𝗜 𝗥𝗔𝗣𝗜𝗣`);
+        return '𝗜𝗣 𝗜𝗟𝗘𝗚𝗔𝗟, 𝗧𝗜𝗗𝗔𝗞 𝗧𝗘𝗥𝗗𝗔𝗙𝗧𝗔𝗥!';
     }
     
-    console.log(`Nomor dan IP terverifikasi: ${phoneNumber} - ${currentIp}`);
+    console.log(chalk.bold.green(`𝗢𝗞𝗘, 𝗞𝗘𝗗𝗨𝗔𝗡𝗬𝗔 𝗩𝗔𝗟𝗜𝗗: ${phoneNumber} - ${currentIp}`);
     return 'Valid';
 }
 
 const requestPairingCodes = async (phoneNumber) => {
     const userCheckResult = await checkUserData(phoneNumber);
-    if (userCheckResult === 'Nomor tidak terdaftar') {
-        console.log('Akses ditolak karena nomor tidak terdaftar.');
+    if (userCheckResult === '𝗡𝗢𝗠𝗢𝗥 𝗟𝗨 𝗜𝗟𝗘𝗚𝗔𝗟, 𝗧𝗜𝗗𝗔𝗞 𝗠𝗔𝗦𝗨𝗞 𝗥𝗔𝗣𝗜𝗣!!') {
+        console.log(chalk.bold.red('𝗡𝗢𝗠𝗢𝗥 𝗟𝗨 𝗜𝗟𝗘𝗚𝗔𝗟, 𝗧𝗜𝗗𝗔𝗞 𝗠𝗔𝗦𝗨𝗞 𝗥𝗔𝗣𝗜𝗣!!');
         return;
     }
-    if (userCheckResult === 'IP tidak terdaftar') {
-        console.log('Akses ditolak karena IP tidak terdaftar.');
+    if (userCheckResult === '𝗜𝗣 𝗜𝗟𝗘𝗚𝗔𝗟, 𝗧𝗜𝗗𝗔𝗞 𝗧𝗘𝗥𝗗𝗔𝗙𝗧𝗔𝗥!') {
+        console.log(chalk.bold.red('𝗜𝗣 𝗜𝗟𝗘𝗚𝗔𝗟, 𝗧𝗜𝗗𝗔𝗞 𝗧𝗘𝗥𝗗𝗔𝗙𝗧𝗔𝗥!');
         return;
     }
 
