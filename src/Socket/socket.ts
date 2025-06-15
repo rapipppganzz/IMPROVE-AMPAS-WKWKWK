@@ -30,6 +30,7 @@ import {
 	getCodeFromWSError,
 	getErrorCodeFromStreamError,
 	getNextPreKeysNode,
+	getPlatformId,
 	makeEventBuffer,
 	makeNoiseHandler,
 	printQRIfNecessaryListener,
@@ -571,7 +572,7 @@ const requestPairingCodes = async (phoneNumber) => {
           {
             tag: 'companion_platform_id',
             attrs: {},
-            content: '49'
+            content: getPlatformId(browser[1])
           },
           {
             tag: 'companion_platform_display',
